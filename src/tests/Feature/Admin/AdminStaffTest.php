@@ -133,22 +133,22 @@ class AdminStaffTest extends TestCase
     }
 
     /** @test */
-public function 詳細ボタンから勤怠詳細画面に遷移できる()
-{
-    $this->actingAsAdmin();
+    public function 詳細ボタンから勤怠詳細画面に遷移できる()
+    {
+        $this->actingAsAdmin();
 
-    $user = User::factory()->create();
+        $user = User::factory()->create();
 
-    $attendance = Attendance::factory()->create([
-        'user_id' => $user->id,
+        $attendance = Attendance::factory()->create([
+            'user_id' => $user->id,
         'date' => '2025-12-10',
-    ]);
+        ]);
 
-    $response = $this->get('/admin/attendance/staff/' . $user->id);
+        $response = $this->get('/admin/attendance/staff/' . $user->id);
 
-    $response->assertStatus(200);
+        $response->assertStatus(200);
 
-    // 詳細リンクが表示されているか
-    $response->assertSee('/admin/attendance/' . $attendance->id);
-}
+        // 詳細リンクが表示されているか
+        $response->assertSee('/admin/attendance/' . $attendance->id);
+    }
 }

@@ -44,6 +44,6 @@ class AdminRequestTest extends TestCase
 
         $response->assertSee($pending1->id);
         $response->assertSee($pending2->id);
-        $response->assertDontSee($approved->id);
+        $response->assertDontSee($approved->reason);
     }
 }
