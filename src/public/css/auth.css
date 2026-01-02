@@ -1,0 +1,56 @@
+body {
+    background: #FFFFFF;
+    color: #000000;
+}
+
+.link {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+    color: #0073CC;
+}
+
+.verify-container {
+    text-align: center;
+    padding-top: 150px;
+}
+
+.verify-message {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.verify-form {
+    margin-bottom: 52px;
+}
+
+.verify-button {
+    padding: 15px 26px;
+    font-size: 20px;
+    font-weight: bold;
+    border: solid 1px #000;
+    background: #D9D9D9;
+    color: #000;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.verify-button:hover {
+    opacity: 0.9;
+}
+
+.resend-button {
+    background: none;
+    border: none;
+    color: #0073CC;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.resend-button:hover {
+    opacity: 0.8;
+}

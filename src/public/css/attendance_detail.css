@@ -1,0 +1,201 @@
+.container {
+    width: 900px;
+    margin: 80px auto;
+    padding: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.attendance-title {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 45px;
+}
+
+.attendance-title__line {
+    display: inline-block;
+    width: 8px;
+    height: 40px;
+    background-color: #000;
+    margin-right: 20px;
+}
+
+.table {
+    width: 900px;
+    border-collapse: collapse;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.table th {
+    width: 35%;
+    color: #737373;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    text-align: left;
+    padding-left: 60px;
+}
+
+.table tr {
+    border-bottom: 3px solid #E1E1E1;
+    height: 85px;
+}
+
+.table tr:last-child {
+    border-bottom: none;
+}
+
+.table td {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    vertical-align: middle;
+    text-align: left;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    padding: 3px;
+    border: none;
+    /* 縦線を消す */
+}
+
+.table td:nth-child(2) {
+    width: 15%;
+    text-align: center;
+}
+
+.table td:nth-child(3){
+    width: 10%;
+    text-align: center;
+}
+
+.table td:nth-child(4) {
+    width: 15%;
+    text-align: center;
+}
+
+.table td:nth-child(5) {
+    width: 25%;
+}
+
+.year-cell input,
+.monthday-cell input {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    text-align: center;
+    margin-top: 8px;
+    height: 29px;
+    width: 103px;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+}
+
+.time-separator {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ===== time input のデザイン調整 ===== */
+input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+/* Firefox */
+input[type="time"]::-moz-focus-inner {
+    border: 0;
+}
+
+/* Edge */
+input[type="time"]::-ms-clear {
+    display: none;
+}
+
+input[type="time"] {
+    width: 103px;
+    height: 29px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    padding: 3px;
+    /* 内側余白を追加 */
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* 空のときに --:-- を透明化（Chrome/Edge/Safari） */
+input[type="time"][value=""]::-webkit-datetime-edit {
+    color: transparent;
+}
+
+/* フォーカス時は表示する（入力中は見えるように） */
+input[type="time"]:focus::-webkit-datetime-edit {
+    color: inherit;
+}
+
+.note-field {
+    width: 316px;
+    height: 72px;
+    resize: none;
+    /* ユーザーがサイズ変更できないようにする */
+    padding: 8px;
+    margin: 15px;
+    font-size: 14px;
+    line-height: 1.4;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+}
+
+.btn {
+    width: 130px;
+    height: 50px;
+    padding: 5px;
+    margin: 30px 0 30px auto;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    text-align: right;
+}
+
+.btn-secondary {
+    background: #696969;
+    color: #fff;
+}
+
+.table td .text-danger {
+    color: red;
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 4px;
+}
+
+.text-warning {
+    color: #FF000080;
+    font-size: 18px;
+    font-weight: 800;
+    margin-top: 20px;
+    text-align: right;
+    line-height: 1;
+    letter-spacing: 0.15em;
+}

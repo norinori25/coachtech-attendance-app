@@ -1,0 +1,135 @@
+/* コンテナ全体 */
+.container {
+    width: 900px;
+    margin: 80px auto;
+    padding: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #737373;
+}
+
+.attendance-title {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+}
+
+.attendance-title__line {
+    display: inline-block;
+    width: 8px;
+    height: 40px;
+    background-color: #000;
+    margin-right: 20px;
+}
+
+/* カレンダーバー */
+.calendar-bar {
+    width: 900px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 50px;
+}
+
+/* カレンダーマーク中央 */
+.calendar-bar__current {
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #000;
+}
+
+.calendar-icon {
+    font-size: 22px;
+    filter: grayscale(100%);
+    /* 白黒化 */
+}
+
+.table {
+    width: 900px;
+    border-collapse: collapse;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    background-color: #fff;
+    border-radius: 10px;
+    table-layout: fixed;
+}
+
+/* ヘッダー */
+.table thead th {
+    height: 40px;
+    color: #737373;
+    text-align: center;
+    padding: 12px;
+    font-weight: bold;
+    border-bottom: 3px solid #E1E1E1;
+    /* ヘッダー下に太めの横線 */
+}
+
+/* 均等幅（詳細列だけ広め） */
+.table thead th,
+.table tbody td {
+    width: calc(900px / 6);
+}
+
+.table thead th:last-child,
+.table tbody td:last-child {
+    width: 120px;
+    /* 詳細列を広めに */
+}
+
+/* 行 */
+.table tbody tr {
+    border-bottom: 2px solid #E1E1E1;
+    height: 33px;
+}
+
+.table tbody td {
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    padding: 3px;
+    border: none;
+    /* 縦線を消す */
+}
+
+/* 詳細ボタン */
+.btn-info {
+    display: inline-block;
+    max-width: 100%;
+    /* セル幅に収める */
+    padding: 5px;
+    color: #000;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn {
+    width: 130px;
+    height: 50px;
+    padding: 5px;
+    margin: 30px 0 30px auto;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    text-align: right;
+}

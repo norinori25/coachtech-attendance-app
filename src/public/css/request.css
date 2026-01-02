@@ -1,0 +1,140 @@
+.container {
+    width: 900px;
+    margin: 80px auto;
+    padding: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #737373;
+}
+
+.request-title {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+}
+
+.request-title__line {
+    display: inline-block;
+    width: 8px;
+    height: 40px;
+    background-color: #000;
+    margin-right: 20px;
+}
+
+.border {
+    margin: 50px auto;
+}
+
+.border__list {
+    border-bottom: 1px solid #000;
+    display: flex;
+}
+
+.border__list li:first-child {
+    padding-left: 8%;
+}
+
+.border__list li {
+    padding: 20px 50px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    line-height: 1;
+    letter-spacing: 0.15em;
+}
+
+.table {
+    width: 900px;
+    border-collapse: collapse;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    background-color: #fff;
+    border-radius: 10px;
+    table-layout: fixed;
+}
+
+.table th {
+    height: 45px;
+    color: #737373;
+    padding: 3px;
+    font-weight: bold;
+    border-bottom: 3px solid #E1E1E1;
+    /* ヘッダー下に太めの横線 */
+}
+
+.table tr {
+    border-bottom: 2px solid #E1E1E1;
+    height: 33px;
+}
+
+.table td {
+    height: 45px;
+    padding: 3px;
+    border: none;
+}
+
+/* 詳細ボタン */
+.btn-info {
+    display: inline-block;
+    max-width: 100%;
+    /* セル幅に収める */
+    padding: 1px;
+    color: #000;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* テーブル列幅を揃える */
+.table th,
+.table td {
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table th:nth-child(1),
+.table td:nth-child(1) {
+    width: 18%;
+    padding-left: 35px;
+}
+
+.table th:nth-child(1) {
+    padding-left: 50px;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    width: 16%;
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+    width: 17%;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+    width: 17%;
+}
+
+.table th:nth-child(5),
+.table td:nth-child(5) {
+    width: 18%;
+}
+
+.table th:nth-child(6),
+.table td:nth-child(6) {
+    width: 14%;
+}
+
+/* タブの選択状態を強調 */
+.border__list a.active {
+    font-weight: bold;
+    color: #000;
+}

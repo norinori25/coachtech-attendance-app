@@ -1,0 +1,22 @@
+# Laravel / PHP
+/vendor/
+.env
+.env.*
+.phpunit.result.cache
+/storage/*.key
+/public/storage
+
+# Node / Frontend
+/node_modules/
+
+# IDE / OS
+/.idea
+/.vscode
+.DS_Store
+Thumbs.db
+
+# Docker
+/docker/*.log
+
+# MySQL data directory
+docker/mysql/data/

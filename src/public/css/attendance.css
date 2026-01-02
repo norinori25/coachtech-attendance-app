@@ -1,0 +1,223 @@
+.attendance-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+.attendance-card {
+    text-align: center;
+    width: 550px;
+    margin-top: 40px;
+}
+
+/* ステータス（勤務外・出勤中など） */
+.status {
+    display: inline-block;
+    background: #C8C8C8;
+    color: #696969;
+    font-weight: 700;
+    padding: 10px 15px;
+    border-radius: 50px;
+    margin-bottom: 40px;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: 0.15em;
+}
+
+/* 日付・時間 */
+.date {
+    font-size: 40px;
+    font-weight: 400;
+    color: #555;
+    line-height: 1;
+    margin-bottom: 30px;
+}
+
+.time {
+    font-size: 80px;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 60px;
+}
+
+.btn {
+    width: 221px;
+    height: 77px;
+    padding: 15px 0;
+    margin: 0 auto 15px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    text-align: center;
+}
+
+.break-btn {
+    background: #fff;
+    color: #000;
+}
+
+/* 横並び用のラッパー */
+.btn-row {
+    display: flex;
+    gap:70px;
+}
+
+/* 退勤済メッセージ */
+.finish {
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    margin-top: 30px;
+}
+
+/* コンテナ全体 */
+.container {
+    width: 900px;
+    margin: 80px auto;
+    padding: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #737373;
+}
+
+.attendance-title {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+}
+
+.attendance-title__line {
+    display: inline-block;
+    width: 8px;
+    height: 40px;
+    background-color: #000;
+    margin-right: 20px;
+}
+
+/* カレンダーバー */
+.calendar-bar {
+    width: 900px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 50px;
+}
+
+/* カレンダーマーク中央 */
+.calendar-bar__current {
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #000;
+}
+
+.calendar-icon {
+    font-size: 22px;
+    filter: grayscale(100%);
+    /* 白黒化 */
+}
+
+/* ===== テーブルのデザイン ===== */
+.table {
+    width: 900px;
+    border-collapse: collapse;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: 0.15em;
+    background-color: #fff;
+    border-radius: 10px;
+    table-layout: fixed;
+}
+
+/* ヘッダー */
+.table thead th {
+    height:40px;
+    color: #737373;
+    text-align: center;
+    padding: 12px;
+    font-weight: bold;
+    border-bottom: 3px solid #E1E1E1;
+    /* ヘッダー下に太めの横線 */
+}
+
+/* 均等幅（詳細列だけ広め） */
+.table thead th,
+.table tbody td {
+    width: calc(900px / 6);
+}
+
+.table thead th:last-child,
+.table tbody td:last-child {
+    width: 120px;
+    /* 詳細列を広めに */
+}
+
+/* 行 */
+.table tbody tr {
+    border-bottom: 2px solid #E1E1E1;
+    height: 33px;
+}
+
+.table tbody td {
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    padding: 3px;
+    border: none;
+    /* 縦線を消す */
+}
+
+/* 詳細ボタン */
+.btn-info {
+    display: inline-block;
+    max-width: 100%;
+    /* セル幅に収める */
+    padding: 5px;
+    color: #000;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* 勤怠詳細専用のテーブル調整 */
+.attendance-detail-table th {
+    width: 200px;
+    text-align: left;
+    padding: 5px 0 5px 20px;
+}
+
+.attendance-detail-table input[type="time"] {
+    display: inline-block;
+    margin-right: 6px;
+}
+
+/* 行の高さを広げる */
+.attendance-detail-table tr {
+    height: 50px;
+    /* 行全体の高さを広げる */
+}
+
+.table.attendance-detail-table td {
+    text-align: left;
+    color: #000;
+    padding: 8px 12px;
+    vertical-align: middle;
+}
