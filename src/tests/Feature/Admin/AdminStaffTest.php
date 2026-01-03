@@ -141,7 +141,7 @@ class AdminStaffTest extends TestCase
 
         $attendance = Attendance::factory()->create([
             'user_id' => $user->id,
-        'date' => '2025-12-10',
+        'date' => now()->format('Y-m-d'),
         ]);
 
         $response = $this->get('/admin/attendance/staff/' . $user->id);
