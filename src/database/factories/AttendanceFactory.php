@@ -11,7 +11,7 @@ class AttendanceFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'date' => now()->format('Y-m-d'),
+            'date' => $this->faker->dateTimeBetween('-90 days', 'now')->format('Y-m-d'),
             'start_time' => null,
             'end_time' => null,
             'status' => '勤務外',

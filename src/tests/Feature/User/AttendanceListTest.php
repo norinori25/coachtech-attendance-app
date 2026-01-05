@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Attendance;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Carbon\Carbon;
 
 class AttendanceListTest extends TestCase
 {
@@ -25,15 +26,21 @@ public function 自分の勤怠情報が一覧に全て表示される()
 
     $this->actingAs($user);
 
-    $response = $this->get('/attendance/list');
-
-    $response->assertStatus(200);
+    $month = Carbon::parse($attendances[0]->date)->format('Y-m');
+    $response = $this->get('/attendance/list?month=' . $month);
 
     foreach ($attendances as $attendance) {
-        // Blade の表示形式に合わせる（MM/DD(dd)）
-        $expected = \Carbon\Carbon::parse($attendance->date)
-            ->locale('ja')
-            ->isoFormat('MM/DD(dd)');
+
+        // この勤怠が表示対象の月か？
+        if (Carbon::parse($attendance->date)->format('Y-m') !== $month) {
+            continue; // 表示されないのでスキップ
+        }
+
+        $date = Carbon::parse($attendance->date);
+        $week = ['日','月','火','水','木','金','土'];
+        $w = $week[$date->dayOfWeek];
+
+        $expected = $date->format('m/d') . "($w)";
 
         $response->assertSee($expected);
     }

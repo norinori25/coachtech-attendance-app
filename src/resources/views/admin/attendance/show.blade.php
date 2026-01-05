@@ -12,10 +12,10 @@
 
     <h1 class="attendance-title">
         <span class="attendance-title__line"></span>
-        勤怠詳細（管理者）
+        勤怠詳細
     </h1>
 
-    {{-- 申請が存在する場合（一般ユーザーが出した修正申請） --}}
+    {{-- 申請が存在する場合（承認画面） --}}
     @if($attendanceRequest)
 
         <table class="table attendance-detail-table">
@@ -41,7 +41,7 @@
 
             @foreach($attendanceRequest->attendance->breakRecords as $index => $break)
                 <tr>
-                    <th>休憩{{ $index+1 }}</th>
+                    <th>休憩{{ $index + 1 }}</th>
                     <td>{{ optional($break->break_start)->format('H:i') }}</td>
                     <td class="time-separator">～</td>
                     <td>{{ optional($break->break_end)->format('H:i') }}</td>
@@ -66,7 +66,7 @@
             <button type="button" class="btn btn-secondary" disabled>承認済み</button>
         @endif
 
-    {{-- 申請が存在しない場合（管理者が直接修正するケース） --}}
+    {{-- 申請が存在しない場合（管理者が直接修正） --}}
     @else
 
         <form action="{{ route('admin.attendance.update', $attendance->id) }}" method="POST">
@@ -78,7 +78,6 @@
                     <td>{{ $attendance->user->name }}</td>
                     <td colspan="3"></td>
                 </tr>
-
                 <tr>
                     <th>日付</th>
                     <td class="year-cell">{{ $attendance->date->format('Y年') }}</td>
@@ -86,7 +85,6 @@
                     <td class="monthday-cell">{{ $attendance->date->format('m月d日') }}</td>
                     <td></td>
                 </tr>
-
                 <tr>
                     <th>出勤・退勤</th>
                     <td>

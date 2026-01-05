@@ -58,9 +58,9 @@
                         @php
                             $totalBreakMinutes = 0;
                             foreach ($attendance->breakRecords as $break) {
-                                if ($break->start_time && $break->end_time) {
-                                    $totalBreakMinutes += \Carbon\Carbon::parse($break->end_time)
-                                        ->diffInMinutes(\Carbon\Carbon::parse($break->start_time));
+                                if ($break->break_start && $break->break_end) {
+                                    $totalBreakMinutes += \Carbon\Carbon::parse($break->break_end)
+                                        ->diffInMinutes(\Carbon\Carbon::parse($break->break_start));
                                 }
                             }
                         @endphp

@@ -50,14 +50,19 @@ class AdminStaffTest extends TestCase
         'user_id' => $user->id,
         ]);
 
-        $response = $this->get('/admin/attendance/staff/' . $user->id);
+        $month = Carbon::parse($attendances[0]->date)->format('Y-m');
+        $response = $this->get('/admin/attendance/staff/' . $user->id . '?month=' . $month);
 
         $response->assertStatus(200);
 
         foreach ($attendances as $attendance) {
 
-            $date = Carbon::parse($attendance->date);
+            // この勤怠が表示対象の月か？
+            if (Carbon::parse($attendance->date)->format('Y-m') !== $month) {
+                continue; // 表示されないのでスキップ
+            }
 
+            $date = Carbon::parse($attendance->date);
             $week = ['日','月','火','水','木','金','土'];
             $w = $week[$date->dayOfWeek];
 

@@ -11,7 +11,7 @@
 <div class="container">
     {{-- タイトル --}}
     <h1 class="attendance-title">
-        <span class="attendance-title__line"></span>{{ now()->format('Y年m月d日') }} の勤怠
+    <span class="attendance-title__line"></span>{{ $currentDate->format('Y年m月d日') }} の勤怠
     </h1>
 
     {{-- カレンダーバー --}}
@@ -65,7 +65,7 @@
                     <td>{{ $attendance->total_hours }}</td>
 
                     <td>
-                        <a href="{{ url('/admin/attendance/' . $attendance->id) }}" class="btn-info">詳細</a>
+                        <a href="{{ route('admin.attendance.show', $attendance->id) }}" class="btn-info">詳細</a>
                     </td>
                 </tr>
             @endforeach

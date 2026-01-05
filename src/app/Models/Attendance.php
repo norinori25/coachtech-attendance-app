@@ -69,4 +69,18 @@ class Attendance extends Model
     {
         return $this->hasOne(AttendanceRequest::class);
     }
+
+    public function getBreakTotalAttribute()
+    {
+        $total = 0;
+
+        foreach ($this->breakRecords as $break) {
+            if ($break->break_start && $break->break_end) {
+                $total += Carbon::parse($break->break_end)
+                    ->diffInMinutes(Carbon::parse($break->break_start));
+            }
+        }
+
+        return sprintf('%d:%02d', floor($total / 60), $total % 60);
+    }
 }

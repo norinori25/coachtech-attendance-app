@@ -40,7 +40,7 @@ class AttendanceController extends Controller
 
         $attendanceRequest = $attendance->attendanceRequest ?? null;
 
-        return view('user.attendance.show', compact(
+        return view('admin.attendance.show', compact(
             'attendance',
             'attendanceRequest'
         ));
@@ -80,7 +80,7 @@ class AttendanceController extends Controller
             ],
             'note' => ['required', 'string'],
         ], [
-            // ★ これが必要！
+
             'note.required' => '備考を記入してください',
         ]);
 
@@ -93,7 +93,12 @@ class AttendanceController extends Controller
             'note' => $request->note,
         ]);
 
-        return back()->with('message', '勤怠情報を更新しました');
+        return redirect()
+            ->route('admin.attendance.staffList', [
+                'id'    => $attendance->user_id,
+                'month' => $attendance->date->format('Y-m'),
+            ])
+            ->with('message', '勤怠情報を更新しました');
     }
 
     /**
