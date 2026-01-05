@@ -8,7 +8,6 @@
 
 @section('content')
 
-@include('components.admin_header')
 <form action="/login" method="post" class="authenticate center" novalidate>
     @csrf
     <input type="hidden" name="is_admin_login" value="1">

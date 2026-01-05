@@ -8,7 +8,6 @@
 
 @section('content')
 
-@include('components.admin_header')
 <div class="container">
     <h1 class="staff-title">
         <span class="staff-title__line"></span>スタッフ一覧
@@ -22,6 +21,7 @@
                 <th>月次勤怠</th>
             </tr>
         </thead>
+
         <tbody>
             @foreach($users as $user)
                 <tr>
@@ -34,5 +34,6 @@
             @endforeach
         </tbody>
     </table>
+    
 </div>
 @endsection

@@ -8,7 +8,6 @@
 
 @section('content')
 
-@include('components.admin_header')
 <div class="container">
     {{-- タイトル --}}
     <h1 class="attendance-title">
@@ -18,8 +17,7 @@
     {{-- カレンダーバー --}}
     <div class="calendar-bar">
         <div class="calendar-bar__prev">
-            <a href="{{ route('admin.attendance.index', ['date' => $currentDate->copy()->subDay()->toDateString()]) }}">← 前日
-            </a>
+            <a href="{{ route('admin.attendance.index', ['date' => $currentDate->copy()->subDay()->toDateString()]) }}">← 前日</a>
         </div>
 
         <div class="calendar-bar__current">
@@ -28,8 +26,7 @@
         </div>
 
         <div class="calendar-bar__next">
-            <a href="{{ route('admin.attendance.index', ['date' => $currentDate->copy()->addDay()->toDateString()]) }}">翌日 →
-            </a>
+            <a href="{{ route('admin.attendance.index', ['date' => $currentDate->copy()->addDay()->toDateString()]) }}">翌日 →</a>
         </div>
     </div>
 
@@ -68,7 +65,7 @@
                     <td>{{ $attendance->total_hours }}</td>
 
                     <td>
-                        <a href="{{ url('/admin/attendance/' . $attendance->id) }}" class=" btn-info">詳細</a>
+                        <a href="{{ url('/admin/attendance/' . $attendance->id) }}" class="btn-info">詳細</a>
                     </td>
                 </tr>
             @endforeach

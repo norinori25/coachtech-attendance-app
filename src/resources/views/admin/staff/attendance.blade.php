@@ -8,7 +8,6 @@
 
 @section('content')
 
-@include('components.admin_header')
 <div class="container">
     {{-- タイトル --}}
     <h1 class="attendance-title">

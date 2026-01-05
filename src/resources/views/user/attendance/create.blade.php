@@ -8,8 +8,6 @@
 
 @section('content')
 
-@include('components.header')
-
 <div class="attendance-wrapper">
     <div class="attendance-card">
 

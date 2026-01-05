@@ -41,24 +41,25 @@ class RequestController extends Controller
     }
 
     /**
- * 修正申請承認処理
- */
-public function approve($attendance_correct_request_id)
-{
-    $request = AttendanceRequest::findOrFail($attendance_correct_request_id);
-    
-    // ステータスを「承認済み」に更新
-    $request->update(['status' => '承認済み']);
+    * 修正申請承認処理
+    */
+    public function approve($attendance_correct_request_id)
+    {
+        $request = AttendanceRequest::findOrFail($attendance_correct_request_id);
 
-    // 勤怠データを更新（追加）
-    $attendance = $request->attendance;
-    $attendance->update([
-        'start_time' => $request->request_start_time,
-        'end_time' => $request->request_end_time,
-    ]);
+        $request->update(['status' => '承認済み']);
 
-    return redirect()
-        ->route('admin.attendance_request.index')
-        ->with('message', '修正申請を承認しました。');
-}
+        $attendance = $request->attendance;
+
+        if ($attendance) {
+            $attendance->update([
+                'start_time' => $request->request_start_time,
+                'end_time' => $request->request_end_time,
+            ]);
+        }
+
+        return redirect()
+            ->route('admin.attendance_request.index')
+            ->with('message', '修正申請を承認しました。');
+    }
 }

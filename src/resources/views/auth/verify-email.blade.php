@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-@include('components.header')
 
 <div class="verify-container">
     <p class="verify-message">

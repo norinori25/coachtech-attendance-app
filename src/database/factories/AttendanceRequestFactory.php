@@ -12,12 +12,14 @@ class AttendanceRequestFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'            => null,
-            'attendance_id'      => null,
+            'user_id'            => \App\Models\User::factory(),
+            'attendance_id'      => \App\Models\Attendance::factory(),
             'attendance_date'    => now()->toDateString(),
             'reason'             => $this->faker->sentence(),
             'break_start'        => '12:00',
             'break_end'          => '13:00',
+            'request_start_time' => '09:00:00',
+            'request_end_time'   => '18:00:00',
             'status'             => '承認待ち',
         ];
     }

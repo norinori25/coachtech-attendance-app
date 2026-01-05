@@ -10,9 +10,9 @@ class BreakRecordFactory extends Factory
     public function definition()
     {
         return [
-            'attendance_id' => Attendance::inRandomOrder()->first()->id ?? Attendance::factory(),
-            'break_start' => $this->faker->dateTime(),
-            'break_end' => $this->faker->dateTime(),
+            'attendance_id' => Attendance::factory(),
+            'break_start' => $this->faker->dateTimeBetween('-3 hours', '-1 hours'),
+            'break_end' => $this->faker->dateTimeBetween('-1 hours', 'now'),
         ];
     }
 }

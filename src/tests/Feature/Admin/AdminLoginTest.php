@@ -39,20 +39,17 @@ class AdminLoginTest extends TestCase
     /** @test */
     public function 登録内容と一致しない場合はエラーメッセージが表示される()
     {
-        // 管理者ユーザーを作成（is_admin = true）
         User::factory()->create([
             'email' => 'realadmin@example.com',
             'password' => bcrypt('correctpass'),
             'is_admin' => true,
         ]);
 
-        // 間違った情報でログイン
         $response = $this->post('/login', [
             'email' => 'wrong@example.com',
             'password' => 'wrongpass',
         ]);
 
-        // Fortify は email キーにエラーを返す
         $response->assertSessionHasErrors([
             'email' => 'ログイン情報が登録されていません'
         ]);

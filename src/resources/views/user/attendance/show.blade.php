@@ -8,12 +8,6 @@
 
 @section('content')
 
-@if(auth()->user()->is_admin)
-    @include('components.admin_header')
-@else
-    @include('components.header')
-@endif
-
 <div class="container">
 
     <h1 class="attendance-title">
@@ -117,14 +111,17 @@
                     </td>
                     <td></td>
                 </tr>
+                @php
+                    $firstBreak = $attendance->breakRecords->first();
+                @endphp
                 <tr>
                     <th>休憩</th>
                     <td>
-                        <input type="time" id="break_start_new" name="break_start_new" value="{{ old('break_start_new', optional($attendance->breakRecords->first()->break_start)->format('H:i')) }}">
+                        <input type="time" id="break_start_new" name="break_start_new" value="{{ old('break_start_new', optional($firstBreak?->break_start)->format('H:i')) }}">
                     </td>
                     <td class="time-separator">～</td>
                     <td>
-                        <input type="time" id="break_end_new" name="break_end_new" value="{{ old('break_end_new', optional($attendance->breakRecords->first()->break_end)->format('H:i')) }}">
+                        <input type="time" id="break_end_new" name="break_end_new" value="{{ old('break_end_new', optional($firstBreak?->break_end)->format('H:i')) }}">
                     </td>
                     <td></td>
                 </tr>

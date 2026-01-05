@@ -1,48 +1,68 @@
 @extends('layouts.default')
 
-@section('title', '修正申請承認（管理者）')
+@section('title', '修正申請（管理者）')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('/css/attendance_detail.css') }}">
+@endsection
 
 @section('content')
-@include('components.admin_header')
 
 <div class="container">
-    <h1>修正申請承認（管理者）</h1>
 
-    <table class="table table-bordered">
+    <h1 class="attendance-title">
+        <span class="attendance-title__line"></span>
+        勤怠詳細
+    </h1>
+
+    <table class="table attendance-detail-table">
         <tr>
-            <th>申請ID</th>
-            <td>{{ $request->id }}</td>
-        </tr>
-        <tr>
-            <th>ユーザー名</th>
+            <th>名前</th>
             <td>{{ $request->user->name }}</td>
+            <td colspan="3"></td>
         </tr>
         <tr>
-            <th>対象日</th>
-            <td>{{ $request->attendance->date ?? '' }}</td>
+            <th>日付</th>
+            <td class="year-cell">{{ \Carbon\Carbon::parse($request->attendance->date)->format('Y年') }}</td>
+            <td></td>
+            <td class="monthday-cell">{{ \Carbon\Carbon::parse($request->attendance->date)->format('m月d日') }}</td>
+            <td></td>
         </tr>
         <tr>
-            <th>申請内容</th>
-            <td>{{ $request->reason }}</td>
+            <th>出勤・退勤</th>
+            <td>{{ optional($request->attendance->start_time)->format('H:i') }}</td>
+            <td class="time-separator">～</td>
+            <td>{{ optional($request->attendance->end_time)->format('H:i') }}</td>
+            <td></td>
         </tr>
+        @foreach($request->attendance->breakRecords as $index => $break)
+            <tr>
+                <th>休憩{{ $index+1 }}</th>
+                <td>{{ optional($break->break_start)->format('H:i') }}</td>
+                <td class="time-separator">～</td>
+                <td>{{ optional($break->break_end)->format('H:i') }}</td>
+                <td></td>
+            </tr>
+        @endforeach
         <tr>
-            <th>ステータス</th>
-            <td>{{ $request->status }}</td>
+            <th>備考</th>
+            <td colspan="3">{{ $request->reason }}</td>
+            <td></td>
         </tr>
     </table>
 
-    {{-- 承認フォーム --}}
+    {{-- 管理者用承認ボタン --}}
     @if($request->status === '承認待ち')
-    <form action="{{ route('admin.attendance_request.approve', $request->id) }}" method="post" class="mt-3">
-        @csrf
-        <button type="submit" class="btn btn-success">承認する</button>
-        <a href="{{ route('admin.attendance_request.index') }}" class="btn btn-secondary">一覧に戻る</a>
-    </form>
-@else
-    <div class="mt-3">
-        <span class="text-muted">この申請は既に {{ $request->status }} です。</span><br>
-        <a href="{{ route('admin.attendance_request.index') }}" class="btn btn-secondary mt-2">一覧に戻る</a>
-    </div>
-@endif
+        <form action="{{ route('admin.attendance_request.approve', $request->id) }}" method="POST" class="mt-3">
+            @csrf
+            <button type="submit" class="btn btn-dark">承認</button>
+        </form>
+    @else
+        <div class="mt-3">
+            <a href="{{ route('admin.attendance_request.index') }}" class="btn btn-secondary mt-2">承認済</a>
+        </div>
+    @endif
+
 </div>
+
 @endsection

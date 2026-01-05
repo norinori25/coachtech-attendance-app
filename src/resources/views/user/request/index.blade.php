@@ -8,7 +8,6 @@
 
 @section('content')
 
-@include('components.header')
 <div class="container">
     <h1 class="request-title">
         <span class="request-title__line"></span>申請一覧

@@ -49,7 +49,7 @@ class AttendanceStartTest extends TestCase
 
         // 2. 出勤ボタンが表示されないことを確認
         $response = $this->actingAs($user)->get('/attendance');
-        $response->assertDontSee('出勤');
+        $response->assertDontSee('value="start"', false);
     }
 
     /** @test */

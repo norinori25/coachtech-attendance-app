@@ -5,8 +5,8 @@ namespace Tests\Feature\Admin;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Attendance;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\BreakRecord;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AdminAttendanceDetailTest extends TestCase
 {
@@ -25,15 +25,15 @@ class AdminAttendanceDetailTest extends TestCase
         $this->actingAs($admin);
 
         $attendance = Attendance::factory()->create([
-            'date' => '2024-01-15',
-            'start_time' => '09:00:00',
-            'end_time' => '18:00:00',
+            'date'        => '2024-01-15',
+            'start_time'  => '09:00:00',
+            'end_time'    => '18:00:00',
         ]);
 
         BreakRecord::factory()->create([
             'attendance_id' => $attendance->id,
-            'break_start' => '12:00:00',
-            'break_end' => '13:00:00',
+            'break_start'   => '12:00:00',
+            'break_end'     => '13:00:00',
         ]);
 
         $response = $this->get('/admin/attendance/' . $attendance->id);
@@ -59,76 +59,75 @@ class AdminAttendanceDetailTest extends TestCase
     /** @test */
     public function 出勤時間が退勤時間より後の場合エラーになる()
     {
+        $admin = User::factory()->create([
+            'is_admin' => 1,
+            'email_verified_at' => now(),
+        ]);
 
-    $admin = User::factory()->create([
-        'is_admin' => 1,
-        'email_verified_at' => now(),
-    ]);
+        $this->actingAs($admin);
 
-    $this->actingAs($admin);
+        $attendance = Attendance::factory()->create();
 
-    $attendance = Attendance::factory()->create();
+        $response = $this->post('/admin/attendance/' . $attendance->id, [
+            'start_time'        => '20:00',
+            'end_time'          => '10:00',
+            'break_start_time'  => '12:00',
+            'break_end_time'    => '13:00',
+            'note'              => 'テスト',
+        ]);
 
-    $response = $this->post('/admin/attendance/' . $attendance->id, [
-        'start_time' => '20:00',
-        'end_time' => '10:00',
-        'break_start_time' => '12:00',
-        'break_end_time' => '13:00',
-        'note' => 'テスト',
-    ]);
-
-    $response->assertSessionHasErrors([
-        'start_time' => '出勤時間もしくは退勤時間が不適切な値です',
-    ]);
+        $response->assertSessionHasErrors([
+            'start_time' => '出勤時間もしくは退勤時間が不適切な値です',
+        ]);
     }
 
     /** @test */
     public function 休憩開始時間が退勤時間より後の場合エラーになる()
     {
-    $admin = User::factory()->create([
-        'is_admin' => 1,
-        'email_verified_at' => now(),
-    ]);
+        $admin = User::factory()->create([
+            'is_admin' => 1,
+            'email_verified_at' => now(),
+        ]);
 
-    $this->actingAs($admin);
+        $this->actingAs($admin);
 
-    $attendance = Attendance::factory()->create();
+        $attendance = Attendance::factory()->create();
 
-    $response = $this->post('/admin/attendance/' . $attendance->id, [
-        'start_time' => '09:00',
-        'end_time' => '18:00',
-        'break_start_time' => '20:00',
-        'break_end_time' => '21:00',
-        'note' => 'テスト',
-    ]);
+        $response = $this->post('/admin/attendance/' . $attendance->id, [
+            'start_time'        => '09:00',
+            'end_time'          => '18:00',
+            'break_start_time'  => '20:00',
+            'break_end_time'    => '21:00',
+            'note'              => 'テスト',
+        ]);
 
-    $response->assertSessionHasErrors([
-        'break_start_time' => '休憩時間が不適切な値です',
-    ]);
+        $response->assertSessionHasErrors([
+            'break_start_time' => '休憩時間が不適切な値です',
+        ]);
     }
 
     /** @test */
     public function 備考が未入力の場合エラーになる()
     {
-    $admin = User::factory()->create([
-        'is_admin' => 1,
-        'email_verified_at' => now(),
-    ]);
+        $admin = User::factory()->create([
+            'is_admin' => 1,
+            'email_verified_at' => now(),
+        ]);
 
-    $this->actingAs($admin);
+        $this->actingAs($admin);
 
-    $attendance = Attendance::factory()->create();
+        $attendance = Attendance::factory()->create();
 
-    $response = $this->post('/admin/attendance/' . $attendance->id, [
-        'start_time' => '09:00',
-        'end_time' => '18:00',
-        'break_start_time' => '12:00',
-        'break_end_time' => '13:00',
-        'note' => '',
-    ]);
+        $response = $this->post('/admin/attendance/' . $attendance->id, [
+            'start_time'        => '09:00',
+            'end_time'          => '18:00',
+            'break_start_time'  => '12:00',
+            'break_end_time'    => '13:00',
+            'note'              => '',
+        ]);
 
-    $response->assertSessionHasErrors([
-        'note' => '備考を記入してください',
-    ]);
+        $response->assertSessionHasErrors([
+            'note' => '備考を記入してください',
+        ]);
     }
 }

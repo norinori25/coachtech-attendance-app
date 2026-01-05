@@ -56,7 +56,6 @@ class AdminStaffTest extends TestCase
 
         foreach ($attendances as $attendance) {
 
-            // Blade の表示形式に合わせる： m/d(曜)
             $date = Carbon::parse($attendance->date);
 
             $week = ['日','月','火','水','木','金','土'];
@@ -75,13 +74,11 @@ class AdminStaffTest extends TestCase
 
         $user = User::factory()->create();
 
-        // 今月（表示されない）
         Attendance::factory()->create([
             'user_id' => $user->id,
             'date' => '2025-12-10',
         ]);
 
-        // 前月（表示される）
         $prev = Attendance::factory()->create([
             'user_id' => $user->id,
             'date' => '2025-11-10',
@@ -91,7 +88,6 @@ class AdminStaffTest extends TestCase
 
         $response->assertStatus(200);
 
-        // 表示形式に合わせる
         $date = Carbon::parse($prev->date);
         $week = ['日','月','火','水','木','金','土'];
         $formatted = $date->format('m/d') . '(' . $week[$date->dayOfWeek] . ')';
@@ -107,13 +103,11 @@ class AdminStaffTest extends TestCase
 
         $user = User::factory()->create();
 
-        // 今月（表示されない）
         Attendance::factory()->create([
             'user_id' => $user->id,
             'date' => '2025-12-10',
         ]);
 
-        // 翌月（表示される）
         $next = Attendance::factory()->create([
             'user_id' => $user->id,
             'date' => '2026-01-10',
@@ -123,7 +117,6 @@ class AdminStaffTest extends TestCase
 
         $response->assertStatus(200);
 
-        // 表示形式に合わせる
         $date = Carbon::parse($next->date);
         $week = ['日','月','火','水','木','金','土'];
         $formatted = $date->format('m/d') . '(' . $week[$date->dayOfWeek] . ')';
@@ -148,7 +141,6 @@ class AdminStaffTest extends TestCase
 
         $response->assertStatus(200);
 
-        // 詳細リンクが表示されているか
         $response->assertSee('/admin/attendance/' . $attendance->id);
     }
 }

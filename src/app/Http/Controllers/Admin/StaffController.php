@@ -13,10 +13,8 @@ class StaffController extends Controller
      */
     public function index()
     {
-        // 全ユーザーを取得（必要なら並び替え）
         $users = User::orderBy('id')->get();
 
-        // ビューに渡す
         return view('admin.staff.index', compact('users'));
     }
 }

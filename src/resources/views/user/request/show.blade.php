@@ -8,8 +8,6 @@
 
 @section('content')
 
-@include('components.header')
-
 <div class="container">
 
     <h1 class="attendance-title">
