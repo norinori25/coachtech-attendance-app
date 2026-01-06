@@ -113,9 +113,8 @@ docker compose exec php php artisan test
 
 ## ER図
 
-（ER図画像をここに貼る）
+![ER図](./docs/er.svg)
 
----
 
 ## URL
 
