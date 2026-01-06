@@ -4,7 +4,7 @@
 
 ### Dockerビルド
 
-1. git clone <git@github.com>:norinori25/coachtech-attendance.git
+1. git clone <git@github.com>:norinori25/coachtech-attendance-app.git
 2. Docker Desktop を起動
 3. docker-compose up -d --build
 
