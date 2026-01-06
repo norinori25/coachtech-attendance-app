@@ -19,7 +19,6 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt('password'), // テスト用固定パスワード
-            'remember_token' => Str::random(10),
             'is_admin' => false, // デフォルトは一般ユーザー
         ];
     }
