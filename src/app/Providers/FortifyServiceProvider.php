@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Actions\Fortify\CreateNewUser;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\LoginRequest as CustomLoginRequest;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -45,8 +45,8 @@ class FortifyServiceProvider extends ServiceProvider
             };
         });
 
-        // Fortify標準LoginRequest → 自作LoginRequest
-        $this->app->singleton(FortifyLoginRequest::class, LoginRequest::class);
+        // Fortify標準LoginRequest → 自作FormRequest
+        $this->app->singleton(FortifyLoginRequest::class, CustomLoginRequest::class);
     }
 
     /**
