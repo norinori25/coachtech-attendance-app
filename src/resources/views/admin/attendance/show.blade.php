@@ -89,12 +89,16 @@
                     <th>出勤・退勤</th>
                     <td>
                         <input type="time" name="start_time" value="{{ old('start_time', optional($attendance->start_time)->format('H:i')) }}">
-                        @error('start_time') <div class="form__error">{{ $message }}</div> @enderror
+                        @error('start_time')
+                            <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </td>
                     <td class="time-separator">～</td>
                     <td>
                         <input type="time" name="end_time" value="{{ old('end_time', optional($attendance->end_time)->format('H:i')) }}">
-                        @error('end_time') <div class="form__error">{{ $message }}</div> @enderror
+                        @error('end_time')
+                            <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </td>
                     <td></td>
                 </tr>
@@ -107,10 +111,16 @@
                     <th>休憩</th>
                     <td>
                         <input type="time" name="break_start_time" value="{{ old('break_start_time', optional($firstBreak?->break_start)->format('H:i')) }}">
+                        @error('break_start_time')
+                            <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </td>
                     <td class="time-separator">～</td>
                     <td>
                         <input type="time" name="break_end_time" value="{{ old('break_end_time', optional($firstBreak?->break_end)->format('H:i')) }}">
+                        @error('break_end_time')
+                            <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </td>
                     <td></td>
                 </tr>
@@ -118,8 +128,10 @@
                 <tr>
                     <th>備考</th>
                     <td colspan="3">
-                        <textarea name="note" class="note-field" required>{{ old('note', $attendance->note) }}</textarea>
-                        @error('note') <div class="form__error">{{ $message }}</div> @enderror
+                        <textarea name="note" class="note-field">{{ old('note', $attendance->note) }}</textarea>
+                        @error('note')
+                            <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </td>
                     <td></td>
                 </tr>

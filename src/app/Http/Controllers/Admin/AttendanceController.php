@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Attendance;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Http\Requests\AdminAttendanceUpdateRequest;
 
 class AttendanceController extends Controller
 {
@@ -49,42 +50,8 @@ class AttendanceController extends Controller
     /**
      * 管理者：勤怠更新
      */
-    public function update(Request $request, $id)
+    public function update(AdminAttendanceUpdateRequest $request, $id)
     {
-        // バリデーション
-        $request->validate([
-            'start_time' => [
-                'required',
-                function ($attribute, $value, $fail) use ($request) {
-                    if ($request->end_time && $value > $request->end_time) {
-                        $fail('出勤時間もしくは退勤時間が不適切な値です');
-                    }
-                }
-            ],
-            'end_time' => ['required'],
-            'break_start_time' => [
-                'nullable',
-                function ($attribute, $value, $fail) use ($request) {
-                    if ($value && $request->end_time && $value > $request->end_time) {
-                        $fail('休憩時間が不適切な値です');
-                    }
-                }
-            ],
-            'break_end_time' => [
-                'nullable',
-                function ($attribute, $value, $fail) use ($request) {
-                    if ($value && $request->end_time && $value > $request->end_time) {
-                        $fail('休憩時間もしくは退勤時間が不適切な値です');
-                    }
-                }
-            ],
-            'note' => ['required', 'string'],
-        ], [
-
-            'note.required' => '備考を記入してください',
-        ]);
-
-        // 勤怠データ更新
         $attendance = Attendance::findOrFail($id);
 
         $attendance->update([
