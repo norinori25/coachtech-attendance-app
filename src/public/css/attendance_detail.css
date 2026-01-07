@@ -138,11 +138,6 @@ input[type="time"] {
     text-align: center;
 }
 
-/* 空のときに --:-- を透明化（Chrome/Edge/Safari） */
-input[type="time"][value=""]::-webkit-datetime-edit {
-    color: transparent;
-}
-
 /* フォーカス時は表示する（入力中は見えるように） */
 input[type="time"]:focus::-webkit-datetime-edit {
     color: inherit;
