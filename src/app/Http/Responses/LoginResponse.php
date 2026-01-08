@@ -3,17 +3,22 @@
 namespace App\Http\Responses;
 
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use Illuminate\Support\Facades\Auth;
 
 class LoginResponse implements LoginResponseContract
 {
     public function toResponse($request)
     {
-        // 管理者ログイン画面から来た場合のみ
-        if ($request->has('is_admin_login')) {
-            return redirect('/admin/attendance/list');
+        // 管理者ログイン
+        if (
+            $request->has('is_admin_login') &&
+            Auth::check() &&
+            Auth::user()->is_admin
+        ) {
+            return redirect()->intended('/admin/attendance/list');
         }
 
-        return redirect('/attendance');
+        // 一般ユーザー
+        return redirect()->intended('/attendance');
     }
 }
-

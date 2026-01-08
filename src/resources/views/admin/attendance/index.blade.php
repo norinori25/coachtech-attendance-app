@@ -58,7 +58,7 @@
                                 }
                             }
                         @endphp
-                        {{ sprintf('%d:%02d', floor($totalBreakMinutes / 60), $totalBreakMinutes % 60) }}
+                        {{ $attendance->start_time ? sprintf('%d:%02d', floor($totalBreakMinutes / 60), $totalBreakMinutes % 60) : '' }}
                     </td>
 
                     {{-- 合計勤務時間（モデルのアクセサ利用） --}}

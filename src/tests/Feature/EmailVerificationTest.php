@@ -35,8 +35,11 @@ class EmailVerificationTest extends TestCase
     public function 認証はこちらからボタンで認証サイトへ遷移する()
     {
         $user = User::factory()->unverified()->create();
+        
+        // セッションに未認証ユーザーを保存（実際のフロー通り）
+        session()->put('unauthenticated_user', $user);
 
-        $response = $this->actingAs($user)->get('/email/verify');
+        $response = $this->get('/email/verify');
 
         $response->assertStatus(200);
         $response->assertSee('認証はこちらから');
@@ -47,13 +50,16 @@ class EmailVerificationTest extends TestCase
     {
         $user = User::factory()->unverified()->create();
 
+        // セッションに未認証ユーザーを保存（実際のフロー通り）
+        session()->put('unauthenticated_user', $user);
+
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',
             now()->addMinutes(60),
             ['id' => $user->id, 'hash' => sha1($user->email)]
         );
 
-        $response = $this->actingAs($user)->get($verificationUrl);
+        $response = $this->get($verificationUrl);
 
         $response->assertRedirect('/attendance');
         $this->assertTrue($user->fresh()->hasVerifiedEmail());

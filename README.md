@@ -121,3 +121,19 @@ docker compose exec php php artisan test
 ・開発環境： http://localhost/
 ・phpMyAdmin: http://localhost:8080/
 ・MailHog: http://localhost:8025/
+
+## テスト用アカウント
+
+### 管理者ユーザー
+
+メールアドレス: <admin@example.com>
+パスワード: admin123
+権限: 管理者（is_admin = true）
+
+### 一般ユーザー（自動生成）
+
+メールアドレス: ランダム生成
+パスワード: password（UserFactory のデフォルト）
+権限: 一般ユーザー
+
+※ 一般ユーザーのメールアドレスは DB から確認できます。
