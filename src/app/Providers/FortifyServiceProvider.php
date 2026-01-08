@@ -7,6 +7,7 @@ use App\Http\Requests\LoginRequest as CustomLoginRequest;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\RegisterResponse;
@@ -14,6 +15,7 @@ use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use App\Http\Responses\LoginResponse as CustomLoginResponse;
+use App\Models\User;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -65,6 +67,28 @@ class FortifyServiceProvider extends ServiceProvider
         // ログイン画面（共通）
         Fortify::loginView(function () {
             return view('auth.login');
+        });
+
+        // ログイン認証のカスタマイズ（メール未認証チェック）
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->email)->first();
+
+            // パスワードが正しいかチェック
+            if ($user && Hash::check($request->password, $user->password)) {
+                // メール未認証の場合
+                if (!$user->hasVerifiedEmail()) {
+                    // セッションに未認証ユーザーを保存
+                    session()->put('unauthenticated_user', $user);
+                    session()->flash('error', 'メールアドレスの認証が完了していません。');
+                    // nullを返すことでログイン失敗にする
+                    return null;
+                }
+                
+                // 認証済みならユーザーを返してログイン成功
+                return $user;
+            }
+
+            return null;
         });
 
         // ログイン試行制限

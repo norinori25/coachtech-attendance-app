@@ -10,6 +10,7 @@ use App\Http\Controllers\User\AttendanceRequestController;
 use App\Http\Controllers\Admin\AttendanceController as AdminAttendanceController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\RequestController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,9 @@ Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
 // ログイン（一般・管理者）
-Route::get('/login', fn() => view('auth.login'))->name('login');
+Route::get('/login', fn() => view('auth.login'))
+->middleware('redirect.unverified')
+->name('login');
 Route::get('/admin/login', fn() => view('admin.auth.login'))->name('admin.login');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
@@ -104,15 +107,12 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
 // ==============================
 // メール認証
 // ==============================
-Route::get('/email/verify', fn() => view('auth.verify-email'))
-    ->middleware('auth')->name('verification.notice');
+Route::get('/email/verify', [VerifyEmailController::class, 'notice'])
+    ->name('verification.notice');
 
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, 'verify'])
+    ->middleware('signed')
+    ->name('verification.verify');
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-    return redirect('/attendance');
-})->middleware(['auth'])->name('verification.verify');
+Route::post('/email/verification-notification', [VerifyEmailController::class, 'resend'])
+    ->name('verification.send');
