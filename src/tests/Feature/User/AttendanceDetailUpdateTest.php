@@ -50,13 +50,14 @@ class AttendanceDetailUpdateTest extends TestCase
             'attendance_id' => $attendance->id,
             'start_time_new' => '09:00',
             'end_time_new' => '18:00',
-            'break_start_new' => '19:00',
-            'break_end_new' => '20:00',
+            'breaks' => [
+                ['start' => '19:00', 'end' => '20:00']
+            ],
             'note' => 'test',
         ]);
 
         $response->assertSessionHasErrors([
-            'break_start_new' => '休憩時間が不適切な値です',
+            'breaks.0.start' => '休憩時間が不適切な値です',
         ]);
     }
 
