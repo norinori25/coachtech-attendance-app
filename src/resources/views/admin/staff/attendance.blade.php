@@ -56,7 +56,8 @@
                                 }
                             }
                         @endphp
-                        {{ sprintf('%d:%02d', floor($totalBreakMinutes / 60), $totalBreakMinutes % 60) }}
+
+                        {{ $attendance->start_time ? sprintf('%d:%02d', floor($totalBreakMinutes / 60), $totalBreakMinutes % 60) : '' }}
                     </td>
                     <td>{{ $attendance->total_hours }}</td>
                     <td>
