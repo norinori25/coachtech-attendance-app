@@ -17,15 +17,26 @@ class CreateAttendanceRequestsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('attendance_id');
-            $table->string('reason');
+            $table->date('attendance_date')->nullable();
+            $table->time('request_start_time')->nullable();
+            $table->time('request_end_time')->nullable();
             $table->time('break_start')->nullable();
             $table->time('break_end')->nullable();
+            $table->string('reason');
+
+            // 承認ステータス
             $table->string('status')->default('承認待ち');
+
             $table->timestamps();
 
             // 外部キー制約
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('attendance_id')->references('id')->on('attendances')->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('attendance_id')
+                ->references('id')->on('attendances')
+                ->onDelete('cascade');
         });
     }
 

@@ -122,6 +122,9 @@ docker compose exec php php artisan test
 ・phpMyAdmin: http://localhost:8080/
 ・MailHog: http://localhost:8025/
 
+
+---
+
 ## テスト用アカウント
 
 ### 管理者ユーザー
